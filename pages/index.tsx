@@ -16,14 +16,18 @@ export default function Home() {
       </main>
       <footer className="flex flex-row gap-8">
         <div>
-          <strong className="block">Words:</strong>
+          <strong className="block whitespace-nowrap">Words:</strong>
           <div>{stats.wordsTotal}</div>
         </div>
         <div>
-          <strong className="block">Top Words:</strong>
+          <strong className="block whitespace-nowrap">Unique Words:</strong>
+          <div>{stats.uniqueWordsTotal}</div>
+        </div>
+        <div>
+          <strong className="block whitespace-nowrap">Top Words:</strong>
           <div>
-            {stats.topWords.length > 0
-              ? stats.topWords
+            {stats.wordsByCount.length > 0
+              ? stats.wordsByCount
                   .slice(0, 50)
                   .map(([word, total]) => `${word} (${total})`)
                   .join(", ")

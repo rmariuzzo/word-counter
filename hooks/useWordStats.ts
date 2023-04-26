@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
+import { countWords } from "../utils/countWords";
+import { getWords } from "../utils/getWords";
 
 type Stats = {
-  words: string[];
   wordsTotal: number;
-  topWords: [string, number][]
+  uniqueWordsTotal: number;
+  wordsByCount: [string, number][]
 };
 
 const defaultStats: Stats = {
-  words: [],
   wordsTotal: 0,
-  topWords: []
+  uniqueWordsTotal: 0,
+  wordsByCount: []
 };
 
 export const useWordStats = (input: string): Stats => {
   const [stats, setStats] = useState(defaultStats);
   useEffect(() => {
-    const words = [...(input.toLowerCase().match(/\w+/g) ?? [])];
-    const topWords = Array.from(
-      words.reduce((map, word) => {
-        map.set(word, (map.get(word) ?? 0) + 1);
-        return map;
-      }, new Map<string, number>())
-    ).sort(([, a], [, b]) => b - a);
+    const words = getWords(input);
+    const wordsTotal = words.length
+    const wordsCount = countWords(words);
+    const uniqueWordsTotal = Object.keys(wordsCount).length
+    const wordsByCount = Object.entries(wordsCount).sort(([, a], [, b]) => b - a);
 
     setStats({
-      words,
-      wordsTotal: words.length,
-      topWords
+      wordsTotal,
+      uniqueWordsTotal,
+      wordsByCount
     });
   }, [input]);
   return stats;
