@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useWordStats } from "@/hooks/useWordStats";
+import { AppTitle } from "@/components/AppTitle";
+import { InputField } from "@/components/InputField";
 
 export default function Home() {
   const [input, setInput] = useState("");
   const stats = useWordStats(input);
   return (
     <div className="h-screen bg-gradient-to-b from-indigo-50 to-indigo-100 flex flex-col gap-8 p-8">
-      <header className="text-4xl">Word Counter Tool</header>
+      <AppTitle />
       <main className="flex-grow flex-shrink">
-        <textarea
-          className="w-full h-full border-2 border-solid rounded border-gray-500 bg-gray-50 p-4"
+        <InputField
+          className="w-full h-full border-2 border-solid rounded border-gray-500 bg-gray-50 p-4 resize-none"
           value={input}
           onChange={(event) => setInput(event.target.value)}
-        ></textarea>
+        />
       </main>
       <footer className="flex flex-row gap-8">
         <div>

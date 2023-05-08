@@ -1,9 +1,13 @@
-import '@/styles/globals.css'
-import { Open_Sans } from 'next/font/google'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import { Inter } from "next/font/google";
+import type { AppProps } from "next/app";
 
-const opensSans = Open_Sans({subsets:['latin']})
+const inter400 = Inter({ subsets: ["latin"], weight: "400" });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <main className={opensSans.className}><Component {...pageProps} /></main>
+  return (
+    <main className={inter400.className}>
+      <Component {...pageProps} />
+    </main>
+  );
 }
